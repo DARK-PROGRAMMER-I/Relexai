@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "527342767732",
+    "project_id": "relexai",
+    "storage_bucket": "relexai.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527342767732:android:f9c0674819bc294bde8b21",
+        "android_client_info": {
+          "package_name": "com.relexai.relexai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "527342767732-v3b3sdvskggg8clsmn43bo77tbmqht2e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAicjW9hSUsPLsSrcKQxldG00YXK3-6-cg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "527342767732-v3b3sdvskggg8clsmn43bo77tbmqht2e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
