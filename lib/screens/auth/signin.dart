@@ -29,7 +29,7 @@ class _SignInState extends State<SignIn> {
                 print("Sign In fialed");
               }else{
                 print("Sign In Successfull");
-                print(result);
+                print(result.userId);
               }
             },
             child: Text("SignIn", style: TextStyle(color: Colors.black87, letterSpacing: 1.5, fontSize: 15, fontWeight: FontWeight.bold ), ) ,
