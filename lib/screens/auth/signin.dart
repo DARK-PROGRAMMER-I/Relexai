@@ -11,6 +11,10 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   final AuthService _auth= AuthService();
 
+  // text states foe signin field
+  String email= '';
+  String passward= '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,25 +22,50 @@ class _SignInState extends State<SignIn> {
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
         backgroundColor: Colors.greenAccent[100],
-        title: Text("Relexai - Damo App", style: TextStyle(color: Colors.black87), ),
+        title: Text("Relexai - Sign in", style: TextStyle(color: Colors.black87), ),
       ),
       body: Container(
           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
-          child: ElevatedButton(
-            onPressed: () async {
-              dynamic result= await _auth.signInAnon();
-              if(result == null){
-                print("Sign In fialed");
-              }else{
-                print("Sign In Successfull");
-                print(result.userId);
-              }
-            },
-            child: Text("SignIn", style: TextStyle(color: Colors.black87, letterSpacing: 1.5, fontSize: 15, fontWeight: FontWeight.bold ), ) ,
-            style: ElevatedButton.styleFrom(
-                primary: Colors.greenAccent[100]
+          child: Form(
+            child: Column(
+              children: [
+                SizedBox(height: 20),
+                TextFormField(// For Email
+                  style: TextStyle(color: Colors.black87),
+                  onChanged: (val){ // val = the value user enters will be stored in the val variable
+                    // now set the val to email.
+                    setState(() {
+                      email = val;
+                    });
+                  },
+                ),
+                SizedBox(height: 20,),
+                TextFormField( // For Passward
+                  obscureText: true,
+                  style: TextStyle(color: Colors.black87),
+                  onChanged: (val){
+
+                    setState(() {
+                     passward = val;
+                    });
+                  },
+                ),
+                SizedBox(height: 20,),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.greenAccent[100],
+
+                  ),
+                  child: Text("Sign in", style: TextStyle(color: Colors.black87, letterSpacing: 1)),
+                  onPressed: () async{
+                      print("Email: $email");
+                      print("Passward: $passward");
+
+                  },
+                ),
+              ],
             ),
-          )
+          ),
 
       ),
 
