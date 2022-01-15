@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:relexai/auth_services/authServices.dart';
+import 'package:relexai/screens/auth/registeration.dart';
 class SignIn extends StatefulWidget {
-  const SignIn({Key? key}) : super(key: key);
+  final Function toggleView;
+  SignIn({required this.toggleView});
 
   @override
   _SignInState createState() => _SignInState();
@@ -15,6 +17,9 @@ class _SignInState extends State<SignIn> {
   String email= '';
   String passward= '';
 
+  // Initiallizing a global Validator
+  final _formKey =  GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,10 +28,21 @@ class _SignInState extends State<SignIn> {
       appBar: AppBar(
         backgroundColor: Colors.greenAccent[100],
         title: Text("Relexai - Sign in", style: TextStyle(color: Colors.black87), ),
+
+      //   Register Button
+        actions: [
+          TextButton.icon(
+            onPressed: (){
+              widget.toggleView();
+            },
+            icon: Icon(Icons.person, color: Colors.black87,),
+            label: Text("Register ",style: TextStyle(color: Colors.black87)) ,)
+        ],
       ),
       body: Container(
           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
           child: Form(
+            key: _formKey,
             child: Column(
               children: [
                 SizedBox(height: 20),
@@ -58,6 +74,7 @@ class _SignInState extends State<SignIn> {
                   ),
                   child: Text("Sign in", style: TextStyle(color: Colors.black87, letterSpacing: 1)),
                   onPressed: () async{
+
                       print("Email: $email");
                       print("Passward: $passward");
 
