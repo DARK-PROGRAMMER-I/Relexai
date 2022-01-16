@@ -13,7 +13,7 @@ class Wrapper extends StatelessWidget {
     // So lets first get the user ID from the Provider Widget
 
     final user= Provider.of<FirebaseUser?>(context);
-    print(user);
+    // print(user);
 
     // Here we want to show the screen based on the userId
 

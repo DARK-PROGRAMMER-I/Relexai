@@ -12,8 +12,8 @@ class AuthService {
   // Firebase user stream. Auth change
   Stream<FirebaseUser?> get user{
     return  _auth.authStateChanges()
-        .map((User? user) => _getFirebaseUserId(user));
-    // .map(_getFirebaseUserId);
+        // .map((User? user) => _getFirebaseUserId(user));
+    .map(_getFirebaseUserId);
   }
 
   // We will create different methods of Authentication
@@ -31,6 +31,16 @@ class AuthService {
   }
 
   // SignIn with email and passward
+  Future signInWithEmailAndPass(String email, String passward)async{
+    try{
+      UserCredential result= await _auth.signInWithEmailAndPassword(email: email, password: passward);
+      User? user= result.user;
+      return _getFirebaseUserId(user);
+    }catch(e){
+      print(e.toString());
+
+    }
+  }
 
   // Register with email and passward
   Future registerWithEmailAndPass(String email, String passward) async{

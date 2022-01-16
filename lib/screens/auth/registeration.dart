@@ -87,6 +87,7 @@ class _RegisterState extends State<Register> {
                 onPressed: () async{
                   if(_formKey.currentState!.validate()){
                     dynamic result= await _auth.registerWithEmailAndPass(email, passward);
+                    // if the result is equal to null, in that case we will update the error! Otherwise error will not be updated!
                     if(result == null){
                       setState(() => error= "Enter valid Email!");
                     }

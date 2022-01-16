@@ -13,7 +13,7 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   final AuthService _auth= AuthService();
 
-  // text states foe signin field
+  // text states for signin field
   String email= '';
   String passward= '';
   String error= '';
@@ -80,11 +80,19 @@ class _SignInState extends State<SignIn> {
                   child: Text("Sign in", style: TextStyle(color: Colors.black87, letterSpacing: 1)),
                   onPressed: () async{
                     if(_formKey.currentState!.validate()){
-                    print("Email: $email");
-                    print("Passward: $passward");
+                    dynamic result= await _auth.signInWithEmailAndPass(email, passward);
+                    if(result == null){
+                      setState(() => error= "Invalid Credentials !");
+                    }
                   }
                 },
                 ),
+
+                SizedBox(height: 15,),
+                Text(error,
+                style: TextStyle(color: Colors.red, fontSize: 14.0),
+                )
+
               ],
             ),
           ),
