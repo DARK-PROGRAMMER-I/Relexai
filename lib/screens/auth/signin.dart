@@ -16,6 +16,7 @@ class _SignInState extends State<SignIn> {
   // text states foe signin field
   String email= '';
   String passward= '';
+  String error= '';
 
   // Initiallizing a global Validator
   final _formKey =  GlobalKey<FormState>();
@@ -48,6 +49,7 @@ class _SignInState extends State<SignIn> {
                 SizedBox(height: 20),
                 TextFormField(// For Email
                   style: TextStyle(color: Colors.black87),
+                  validator: (val) => val!.isEmpty ? "Enter a valid Email" : null,
                   onChanged: (val){ // val = the value user enters will be stored in the val variable
                     // now set the val to email.
                     setState(() {
@@ -57,10 +59,13 @@ class _SignInState extends State<SignIn> {
                 ),
                 SizedBox(height: 20,),
                 TextFormField( // For Passward
+
                   obscureText: true,
                   style: TextStyle(color: Colors.black87),
-                  onChanged: (val){
 
+                  validator: (val) => val!.length < 6 ? "Enter 6+ char long passward" : null ,
+
+                  onChanged: (val){
                     setState(() {
                      passward = val;
                     });
@@ -74,11 +79,11 @@ class _SignInState extends State<SignIn> {
                   ),
                   child: Text("Sign in", style: TextStyle(color: Colors.black87, letterSpacing: 1)),
                   onPressed: () async{
-
-                      print("Email: $email");
-                      print("Passward: $passward");
-
-                  },
+                    if(_formKey.currentState!.validate()){
+                    print("Email: $email");
+                    print("Passward: $passward");
+                  }
+                },
                 ),
               ],
             ),
