@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:relexai/auth_services/authServices.dart';
 import 'package:relexai/screens/auth/registeration.dart';
+import 'package:relexai/shared/constants.dart';
+import 'package:relexai/shared/loading.dart';
 class SignIn extends StatefulWidget {
   final Function toggleView;
   SignIn({required this.toggleView});
@@ -18,12 +20,15 @@ class _SignInState extends State<SignIn> {
   String passward= '';
   String error= '';
 
+  // Initiallizing a boolean, so that we could set a state of Loading
+  bool loading= false;
+
   // Initiallizing a global Validator
   final _formKey =  GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading? Loading(): Scaffold(
       // Seting background color
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
@@ -48,6 +53,8 @@ class _SignInState extends State<SignIn> {
               children: [
                 SizedBox(height: 20),
                 TextFormField(// For Email
+                  decoration: input_decoration_textField("Email"),
+
                   style: TextStyle(color: Colors.black87),
                   validator: (val) => val!.isEmpty ? "Enter a valid Email" : null,
                   onChanged: (val){ // val = the value user enters will be stored in the val variable
@@ -59,7 +66,7 @@ class _SignInState extends State<SignIn> {
                 ),
                 SizedBox(height: 20,),
                 TextFormField( // For Passward
-
+                  decoration: input_decoration_textField("Passward"),
                   obscureText: true,
                   style: TextStyle(color: Colors.black87),
 
@@ -80,9 +87,14 @@ class _SignInState extends State<SignIn> {
                   child: Text("Sign in", style: TextStyle(color: Colors.black87, letterSpacing: 1)),
                   onPressed: () async{
                     if(_formKey.currentState!.validate()){
+                    setState(()=> loading= true );
                     dynamic result= await _auth.signInWithEmailAndPass(email, passward);
                     if(result == null){
-                      setState(() => error= "Invalid Credentials !");
+
+                      setState(() {
+                          error= "Invalid Credentials !";
+                          loading= false;
+                      });
                     }
                   }
                 },
