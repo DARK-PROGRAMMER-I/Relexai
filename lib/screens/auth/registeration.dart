@@ -24,17 +24,19 @@ class _RegisterState extends State<Register> {
   String email= '';
   String passward= '';
   String error= '';
+// Form key instance
+  final _formKey= GlobalKey<FormState>();
 
   // Loading screen
   bool loading= false;
 
 
-  // Form key instance
-  final _formKey= GlobalKey<FormState>();
+
+
 
   @override
   Widget build(BuildContext context) {
-    return loading ? Loading(): Scaffold(
+    return loading ? Loading(): Scaffold( //
       // Seting background color
       backgroundColor: Colors.grey[200],
 
@@ -95,6 +97,7 @@ class _RegisterState extends State<Register> {
                 onPressed: () async{
                   if(_formKey.currentState!.validate()){
                     setState(() => loading= true);
+
                     dynamic result= await _auth.registerWithEmailAndPass(email, passward);
                     // if the result is equal to null, in that case we will update the error! Otherwise error will not be updated!
                     if(result == null){

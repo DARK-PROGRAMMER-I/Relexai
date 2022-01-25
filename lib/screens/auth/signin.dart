@@ -19,16 +19,16 @@ class _SignInState extends State<SignIn> {
   String email= '';
   String passward= '';
   String error= '';
-
+// Initiallizing a global Validator
+  final _formKey =  GlobalKey<FormState>();
   // Initiallizing a boolean, so that we could set a state of Loading
   bool loading= false;
 
-  // Initiallizing a global Validator
-  final _formKey =  GlobalKey<FormState>();
+
 
   @override
   Widget build(BuildContext context) {
-    return loading? Loading(): Scaffold(
+    return loading? Loading(): Scaffold( //
       // Seting background color
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
@@ -87,8 +87,9 @@ class _SignInState extends State<SignIn> {
                   child: Text("Sign in", style: TextStyle(color: Colors.black87, letterSpacing: 1)),
                   onPressed: () async{
                     if(_formKey.currentState!.validate()){
-                    setState(()=> loading= true );
+
                     dynamic result= await _auth.signInWithEmailAndPass(email, passward);
+                    setState(()=> loading= true );
                     if(result == null){
 
                       setState(() {

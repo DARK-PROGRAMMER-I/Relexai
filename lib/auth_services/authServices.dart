@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:relexai/auth_services/database.dart';
 import 'package:relexai/models/firebase_user.dart';
 
 class AuthService {
@@ -47,6 +48,10 @@ class AuthService {
     try{
       UserCredential result= await _auth.createUserWithEmailAndPassword(email: email, password: passward);
       User? user= result.user;
+      // Here before we pass the user to the getId function, we will first
+      // make a document with uid
+      // we will also use the Function we created in the DataBaseService to update the prefrences
+      await DatabaseServices(user!.uid).updateUserData("4", "malik-ge", 100); // here we are just using a dummy data
 
       return _getFirebaseUserId(user);
     }catch(e){
