@@ -22,9 +22,9 @@ class DatabaseServices{
   List<Relexais> _relexaiListFromSnapShot(QuerySnapshot snapshot){
   return snapshot.docs.map((doc){
     return Relexais(
-      name: doc['name'] ?? '',
-      sugar: doc['sugar'] ?? '0',
-      strength: doc['strength'] ?? 0
+      doc['name'] ?? '',
+      doc['sugar'] ?? '0',
+      doc['strength'] ?? 0
     );
   }).toList();
 }
