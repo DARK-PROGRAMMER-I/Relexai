@@ -6,6 +6,7 @@ import 'package:relexai/auth_services/authServices.dart';
 import 'package:relexai/auth_services/database.dart';
 import 'package:relexai/models/relexai.dart';
 import 'package:relexai/screens/home/relexai_list.dart';
+import 'package:relexai/screens/home/settings_panal.dart';
 
 
 class Home extends StatelessWidget {
@@ -44,7 +45,14 @@ class Home extends StatelessWidget {
                   await _auth.signOut();
                 },
                 icon: Icon(Icons.person, color: Colors.black87 ,),
-                label: Text("Signout", style: TextStyle(color: Colors.black87, fontSize: 17),))
+                label: Text("Signout", style: TextStyle(color: Colors.black87, fontSize: 17),)),
+            TextButton.icon(
+                onPressed: (){
+                  _showSettingPanal(context);
+                },
+                icon: Icon(Icons.settings, color: Colors.black87),
+                label: Text("Settings",style: TextStyle(color: Colors.black87, fontSize: 17) ),
+            )
           ],
 
         ),
@@ -52,5 +60,17 @@ class Home extends StatelessWidget {
         body: Relexai_list(),
       ),
     );
+  }
+  void _showSettingPanal(BuildContext context){
+      showModalBottomSheet(
+          context: context,
+          builder: (context){
+            return Container(
+              padding: EdgeInsets.symmetric(horizontal: 60, vertical: 20),
+
+                child: SettingsPanal(),
+
+            );
+          });
   }
 }
